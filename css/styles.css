@@ -673,6 +673,11 @@ nav {
     resize: vertical;
 }
 
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 /* Footer */
 footer {
     background-color: var(--dark-color);

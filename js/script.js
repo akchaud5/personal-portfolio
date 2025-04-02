@@ -57,8 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // In a real implementation, you would send the form data to a server
-            // For demo purposes, we'll just log it to the console and show a success message
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -66,13 +64,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: document.getElementById('message').value
             };
             
-            console.log('Form submitted:', formData);
+            // Show loading indicator
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
             
-            // Show success message (in a real implementation, you would check for successful submission)
-            alert('Thank you for your message! I will get back to you soon.');
-            
-            // Reset the form
-            contactForm.reset();
+            // Send email using EmailJS service
+            emailjs.send('default_service', 'template_contact', {
+                from_name: formData.name,
+                reply_to: formData.email,
+                subject: formData.subject,
+                message: formData.message,
+                to_email: 'Ayushkumar.chaudhary2003@gmail.com'
+            })
+            .then(function() {
+                console.log('Email sent successfully');
+                alert('Thank you for your message! I will get back to you soon.');
+                contactForm.reset();
+            })
+            .catch(function(error) {
+                console.error('Email send failed:', error);
+                alert('Sorry, there was an error sending your message. Please try again or contact me directly at Ayushkumar.chaudhary2003@gmail.com');
+            })
+            .finally(function() {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            });
         });
     }
 });
