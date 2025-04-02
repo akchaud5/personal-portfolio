@@ -71,12 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             
             // Send email using EmailJS service
-            emailjs.send('service_zncr0is', 'template_contact', {
-                from_name: formData.name,
-                reply_to: formData.email,
+            emailjs.send('service_zncr0is', 'template_5jgjbml', {
+                name: formData.name,
+                email: formData.email,
                 subject: formData.subject,
-                message: formData.message,
-                to_email: 'Ayushkumar.chaudhary2003@gmail.com'
+                message: formData.message
             })
             .then(function() {
                 console.log('Email sent successfully');
