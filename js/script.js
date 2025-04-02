@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             
             // Send email using EmailJS service
-            emailjs.send('default_service', 'template_contact', {
+            emailjs.send('service_zncr0is', 'template_contact', {
                 from_name: formData.name,
                 reply_to: formData.email,
                 subject: formData.subject,
